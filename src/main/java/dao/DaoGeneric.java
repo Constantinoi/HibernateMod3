@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -48,4 +50,17 @@ public class DaoGeneric<E> {
 
 		transacao.commit();// grava alteracao no banco
 	}
+
+	public List<E> listar(Class<E> entidade) {
+		EntityTransaction t = em.getTransaction();
+
+		t.begin();
+
+		List<E> lista = em.createQuery("FROM " + entidade.getName()).getResultList();
+
+		t.commit();
+
+		return lista;
+	}
+
 }

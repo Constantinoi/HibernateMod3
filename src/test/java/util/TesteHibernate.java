@@ -1,5 +1,8 @@
 package util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import dao.DaoGeneric;
@@ -19,10 +22,10 @@ public class TesteHibernate {
 		UsuarioPessoa pessoa = new UsuarioPessoa();
 
 		pessoa.setIdade("28");
-		pessoa.setNome("Jess");
+		pessoa.setNome("Constantino");
 		pessoa.setSobrenome("Barreto");
-		pessoa.setEmail("jess@email.com");
-		pessoa.setLogin("jess");
+		pessoa.setEmail("constantino@email.com");
+		pessoa.setLogin("constantino");
 		pessoa.setSenha("123");
 
 		daoGeneric.salvar(pessoa);
@@ -75,6 +78,18 @@ public class TesteHibernate {
 		daoGeneric.deletar(pessoa);
 
 		System.out.println("deletou");
+
+	}
+
+	@Test
+	public void TesteConsultar() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		List<UsuarioPessoa> pessoa = daoGeneric.listar(UsuarioPessoa.class);
+
+		for (UsuarioPessoa usuarioPessoa : pessoa) {
+			System.out.println(usuarioPessoa);
+			System.out.println();
+		}
 
 	}
 
