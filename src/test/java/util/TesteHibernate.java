@@ -22,11 +22,11 @@ public class TesteHibernate {
 		UsuarioPessoa pessoa = new UsuarioPessoa();
 
 		pessoa.setIdade("28");
-		pessoa.setNome("Constantino");
-		pessoa.setSobrenome("Barreto");
-		pessoa.setEmail("constantino@email.com");
-		pessoa.setLogin("constantino");
-		pessoa.setSenha("123");
+		pessoa.setNome("Constantino2");
+		pessoa.setSobrenome("Barreto2");
+		pessoa.setEmail("constantino@email.com2");
+		pessoa.setLogin("constantino2");
+		pessoa.setSenha("12312");
 
 		daoGeneric.salvar(pessoa);
 	}
@@ -85,6 +85,30 @@ public class TesteHibernate {
 	public void TesteConsultar() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		List<UsuarioPessoa> pessoa = daoGeneric.listar(UsuarioPessoa.class);
+
+		for (UsuarioPessoa usuarioPessoa : pessoa) {
+			System.out.println(usuarioPessoa);
+			System.out.println();
+		}
+
+	}
+
+	@Test
+	public void TesteQueryList() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		List<UsuarioPessoa> pessoa = daoGeneric.getEm().createQuery(" from UsuarioPessoa WHERE nome = 'Constantino'").getResultList();
+
+		for (UsuarioPessoa usuarioPessoa : pessoa) {
+			System.out.println(usuarioPessoa);
+			System.out.println();
+		}
+
+	}
+	
+	@Test
+	public void TesteQueryListMaxResult() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		List<UsuarioPessoa> pessoa = daoGeneric.getEm().createQuery(" from UsuarioPessoa ORDER BY nome ").setMaxResults(3).getResultList();
 
 		for (UsuarioPessoa usuarioPessoa : pessoa) {
 			System.out.println(usuarioPessoa);

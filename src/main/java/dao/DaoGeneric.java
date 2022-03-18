@@ -63,4 +63,8 @@ public class DaoGeneric<E> {
 		return lista;
 	}
 
+	public EntityManager getEm() {
+		return em;
+	}
+
 }
