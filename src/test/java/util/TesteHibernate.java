@@ -1,6 +1,5 @@
 package util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -21,7 +20,7 @@ public class TesteHibernate {
 
 		UsuarioPessoa pessoa = new UsuarioPessoa();
 
-		pessoa.setIdade("28");
+		pessoa.setIdade(28L);
 		pessoa.setNome("Constantino");
 		pessoa.setSobrenome("Barreto2");
 		pessoa.setEmail("constantino@email.com2");
@@ -132,4 +131,14 @@ public class TesteHibernate {
 
 	}
 
+	@Test
+	public void TesteQueryListSomaIdade() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		Long somaIdade = (Long) daoGeneric.getEm().createQuery("select sum(u.idade) from UsuarioPessoa u ")
+				.getSingleResult();
+
+		System.out.println("Soma de todas as idade : " + somaIdade);
+		System.out.println();
+
+	}
 }
